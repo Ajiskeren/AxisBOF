@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bird of Feather</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      margin: 0;
+      overflow: hidden;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      margin: 20px 0;
+      z-index: 1;
+      position: relative;
+    }
+    #start-btn {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #1db954;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1;
+      position: relative;
+    }
+    #start-btn:hover {
+      background-color: #17a744;
+    }
+    #lyrics {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+      z-index: 1;
+      position: relative;
+    }
+    .line {
+      margin: 1em 0;
+      font-size: 1.5em;
+      white-space: pre-wrap;
+    }
+    .gif-float {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      animation: float 8s linear forwards;
+      opacity: 0.8;
+      will-change: transform, opacity;
+    }
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) rotate(var(--rot)) scale(var(--scale));
+        opacity: 0.2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Bird of Feather</h1>
+  <button id="start-btn">Mulai</button>
+  <audio id="song" src="bird.mp3"></audio>
+  <div id="lyrics"></div>
+
+  <script>
+    const lyrics = [
+    ["And I don't know what I'm cryin' for", 135],
+      ["I don't think I could love you moreeeee", 100],
+      ["It might not be long, but baby, I", 100],
+      ["I'll love you 'til the day that I dieeeeeeeeeeeeeeeeeee", 65]
+    ];
+    const delays = [0, 250, 250, 2000]
+
+    function animateText(text, speed, container) {
+      return new Promise(resolve => {
+        let i = 0;
+        const iv = setInterval(() => {
+          if (i < text.length) container.textContent += text[i++];
+          else { clearInterval(iv); resolve(); }
+        }, speed);
+      });
+    }
+
+    async function sing() {
+      const cont = document.getElementById('lyrics');
+      for (let i = 0; i < lyrics.length; i++) {
+        const [text, speed] = lyrics[i];
+        const line = document.createElement('div');
+        line.className = 'line';
+        cont.appendChild(line);
+        await new Promise(r => setTimeout(r, delays[i]));
+        await animateText(text, speed, line);
+      }
+    }
+
+    function createFloatingGif() {
+      const gif = document.createElement("img");
+      gif.src = "bird.gif";
+      gif.className = "gif-float";
+      const size = Math.random() * 70 + 20; // 20–90px acak
+      gif.style.width = `${size}px`;
+      gif.style.top = `${Math.random() * window.innerHeight}px`;
+      gif.style.left = `${Math.random() * window.innerWidth}px`;
+      
+      gif.style.setProperty('--x', `${Math.random() * 600 - 300}px`);
+      gif.style.setProperty('--y', `${Math.random() * 600 - 300}px`);
+      gif.style.setProperty('--scale', (Math.random() * 1.5 + 0.5).toFixed(2));
+      gif.style.setProperty('--rot', `${Math.random() * 360}deg`);
+
+      document.body.appendChild(gif);
+      setTimeout(() => gif.remove(), 8000); // sesuai durasi animasi
+    }
+
+    document.getElementById('start-btn').addEventListener('click', () => {
+      const btn = document.getElementById('start-btn');
+      btn.style.display = 'none';
+
+      const audio = document.getElementById('song');
+      audio.play();
+
+      // Delay 4 detik sebelum mulai GIF dan lirik
+      setTimeout(() => {
+        sing();
+
+        const gifInt = setInterval(createFloatingGif, 300);
+        setTimeout(() => clearInterval(gifInt), 20000); // tampilkan GIF selama 20 detik
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
