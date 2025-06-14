@@ -39,7 +39,6 @@
       text-align: left;
       z-index: 1;
       position: relative;
-      font-size: 25px;
     }
     .line {
       margin: 1em 0;
@@ -79,9 +78,10 @@
     ["And I don't know what I'm cryin' for", 135],
       ["I don't think I could love you moreeeee", 100],
       ["It might not be long, but baby, I", 100],
-      ["I'll love you 'til the day that I dieeeeeeeeeeeeeeeeeee", 65]
+      ["I'll love you 'til the day that I", 65],
+      ["dieeeeeeeeeeeeeeeeeee", 55]
     ];
-    const delays = [0, 250, 250, 2000]
+    const delays = [0, 250, 250, 2000, 100]
 
     function animateText(text, speed, container) {
       return new Promise(resolve => {
