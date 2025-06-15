@@ -20,18 +20,24 @@
       position: relative;
     }
     #start-btn {
-      padding: 10px 20px;
-      font-size: 1.2em;
-      background-color: #1db954;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1;
       position: relative;
+      margin: 50px auto;
+      display: block;
+      padding: 18px 36px;
+      font-size: 1.6em;
+      font-weight: bold;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #007bff, 0 0 30px #007bff;
+      transition:background-color 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
     #start-btn:hover {
-      background-color: #17a744;
+      transform: scale(1.1);
+      background-color:#dc3545;
+      box-shadow: 0 0 25px #dc3545, 0 0 50px #dc3545;
     }
     #lyrics {
       max-width: 800px;
