@@ -173,15 +173,10 @@
 
     document.getElementById('start-btn').addEventListener('click', () => {
       const btn = document.getElementById('start-btn');
+btn.style.display = 'none';
       
       const audio = document.getElementById('song');
-      btn.style.display = 'none';
-
       audio.play();
-
-      audio.onplaying = () => {
-        console.log("mulau semua")
-      }
 
       // Delay 4 detik sebelum mulai GIF dan lirik
       setTimeout(() => {
