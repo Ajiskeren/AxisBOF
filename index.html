@@ -42,14 +42,20 @@
     }
     #lyrics {
       max-width: 800px;
-      margin: 20px auto;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding-right: 10px;
+      margin: 10px auto;
       text-align: left;
-      z-index: 1;
-      position: relative;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .line {
-      margin: 1em 0;
-      font-size: 2.5em;
+    #lyrics::-webkit-scrollbar{
+      display: none;
+    }
+    .line pre {
+      margin: 0.1em 0;
+      font-size: 1.8em;
       line-height: 1.6;
       white-space: normal;
       word-break: break-word;
@@ -94,18 +100,31 @@
 <body>
   <h1>🎵 Bird of Feather</h1>
   <button id="start-btn">Mulai</button>
-  <audio id="song" src="bird.mp3"></audio>
+  <audio id="song" src="cmtmu.mp3"></audio>
   <div id="lyrics"></div>
 
   <script>
     const lyrics = [
-    ["And I don't know what I'm cryin' for", 135],
-      ["I don't think I could love you moreeeee", 100],
-      ["It might not be long, but baby, I", 100],
-      ["I'll love you 'til the day that I", 65],
-      ["dieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", 55]
+      ["But do you feel it too?", 60],
+      ["Like the why I do?", 55],
+      ["Aku calon mantu", 85],
+      ["Terbaik mamamu", 80],
+      ["Walaupun hatimu", 70],
+      ["Sekeras batu", 80],
+      ["Stil got you on mind", 60],
+      ["No matter what you do", 55],
+      [">>>>>>>>>>", 20],
+      ["But do you feel it too?", 40],
+      ["Like the why I do?", 50],
+      ["Aku calon mantu", 50],
+      ["Terbaik mamamu", 50],
+      ["Walaupun hatimu", 50],
+      ["Sekeras batu", 50],
+      ["Stil got you on mind", 50],
+      ["No matter what you do", 50]
+
     ];
-    const delays = [0, 250, 250, 2000, 100]
+    const delays = [300, 450, 260, 650, 550, 500, 290, 500, 400, 550, 500, 500, 500, 500, 500, 500, 500]
 
     function animateText(text, speed, container) {
       return new Promise(resolve => {
@@ -136,7 +155,7 @@
 
     function createFloatingGif() {
       const gif = document.createElement("img");
-      gif.src = "bird.gif";
+      gif.src = "gns.gif";
       gif.className = "gif-float";
       const size = Math.random() * 70 + 20; // 20–90px acak
       gif.style.width = `${size}px`;
@@ -154,18 +173,23 @@
 
     document.getElementById('start-btn').addEventListener('click', () => {
       const btn = document.getElementById('start-btn');
+      
+      const audio = document.getElementById('song');
       btn.style.display = 'none';
 
-      const audio = document.getElementById('song');
       audio.play();
+
+      audio.onplaying = () => {
+        console.log("mulau semua")
+      }
 
       // Delay 4 detik sebelum mulai GIF dan lirik
       setTimeout(() => {
         sing();
 
-        const gifInt = setInterval(createFloatingGif, 300);
+        const gifInt = setInterval(createFloatingGif, 3000);
         setTimeout(() => clearInterval(gifInt), 20000); // tampilkan GIF selama 20 detik
-      }, 4000);
+      }, 0);
     });
   </script>
 </body>
