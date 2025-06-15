@@ -38,6 +38,7 @@
       transform: scale(1.1);
       background-color:#dc3545;
       box-shadow: 0 0 25px #dc3545, 0 0 50px #dc3545;
+      animation: pulse 1.2s infinite;
     }
     #lyrics {
       max-width: 800px;
@@ -62,6 +63,22 @@
       opacity: 0.8;
       will-change: transform, opacity;
     }
+    @keyframes pulse{
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 15px #dc3545, 0 0 30px #dc3545;
+    }
+    50% {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px #dc3545, 0 0 50px #dc3545;
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 25px #dc3545, 0 0 30px #dc3545;
+    }
+  
+  }
+
     @keyframes float {
       0% {
         transform: translate(0, 0) rotate(0deg) scale(1);
